@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pong from '../../components/Pong';
 
 const useStyles = makeStyles({
   container: {
@@ -76,6 +77,7 @@ function HomePage() {
           ))}
         </div>
       </div>
+      <Pong height={500} />
     </div>
   );
 }
