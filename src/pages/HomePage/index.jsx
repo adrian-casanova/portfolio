@@ -1,9 +1,13 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Pong from '../../components/Pong';
+import Section from '../../components/Section';
+import AboutMe from './components/AboutMe';
+import {primaryColor, primaryTextColor} from '../../utils/styles';
+import {useWindowSize} from '../../utils/hooks';
+// import Pong from '../../components/Pong';
 
 const useStyles = makeStyles({
   container: {
@@ -11,12 +15,11 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   header: {
-    backgroundColor: '#fbc042',
+    backgroundColor: primaryColor,
     height: 500,
     display: 'flex',
+    padding: 60,
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     color: '#2f2f2e',
@@ -38,6 +41,20 @@ const useStyles = makeStyles({
     color: '#2f2f2e',
     cursor: 'pointer',
   },
+  nav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 80
+  },
+  navLink: {
+    marginRight: 20,
+    color: primaryTextColor,
+    cursor: 'pointer',
+    '&:hover': {
+      fontSize: 14
+    }
+  }
 });
 
 const socials = [
@@ -46,13 +63,31 @@ const socials = [
     link: 'https://www.linkedin.com/in/adrian-casanova-b7ab2a9b',
   },
   {
+    icon: faGithub,
+    link: 'https://github.com/adrian-casanova'
+  },
+  {
     icon: faTwitter,
     link: 'https://twitter.com/notadriian',
   },
 ];
 
+
+const nav = [
+  {
+    label: 'About Me'
+  },
+  {
+    label: 'Projects'
+  },
+  {
+    label: 'Resume'
+  }
+]
+
 function HomePage() {
   const classes = useStyles();
+  const { height } = useWindowSize();
 
   function handleOpenLink(url) {
     window.open(url);
@@ -60,7 +95,7 @@ function HomePage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.header}>
+      <div className={classes.header} style={{ height }}>
         <Typography className={classes.title} variant="h3">
           Adrian Casanova
         </Typography>
@@ -76,8 +111,15 @@ function HomePage() {
             />
           ))}
         </div>
+        <div className={classes.nav}>
+            {nav.map(navLink => (
+              <Typography variant="caption" className={classes.navLink}>
+                {navLink.label}
+              </Typography>
+            ))}
+        </div>
+        <AboutMe />
       </div>
-      <Pong height={500} />
     </div>
   );
 }
