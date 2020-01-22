@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
+import ProjectsPage from '../pages/ProjectsPage';
 
 function AppRouter() {
   return (
@@ -9,6 +10,11 @@ function AppRouter() {
         exact
         path="/"
         component={HomePage}
+      />
+      <Route
+        exact
+        path="/projects"
+        component={ProjectsPage}
       />
     </Router>
   )

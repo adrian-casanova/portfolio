@@ -11,10 +11,13 @@ const useStyles = makeStyles(() => ({
     alignSelf: 'center',
     width: '100%',
     marginTop: 50,
-    transform: 'rotate(-2deg)'
+    transform: 'rotate(-2deg)',
+    overflow: 'hidden',
+    borderTop: '5px solid #627992'
   },
   cardTitle: {
-    color: primaryTextColor
+    color: primaryTextColor,
+    fontWeight: 'bolder'
   },
   tech: {
     display: 'flex',
@@ -30,7 +33,8 @@ const useStyles = makeStyles(() => ({
   },
   subTitle: {
     color: primaryTextColor,
-    marginTop: 10
+    marginTop: 10,
+    fontWeight: 'bolder'
   },
   text: {
     color: primaryTextColor
@@ -85,7 +89,7 @@ function AboutMe() {
         Location: 
       </Typography>
       <Typography className={classes.text}>
-        Deerfield Beach, FL
+          South Florida
       </Typography>
     </Paper>
   );

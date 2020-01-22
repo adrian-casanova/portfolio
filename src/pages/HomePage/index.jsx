@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Fade } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { faLinkedin, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import Section from '../../components/Section';
 import AboutMe from './components/AboutMe';
 import {primaryColor, primaryTextColor} from '../../utils/styles';
 import {useWindowSize} from '../../utils/hooks';
+import { useHistory } from 'react-router-dom';
 // import Pong from '../../components/Pong';
 
 const useStyles = makeStyles({
@@ -15,7 +16,6 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   header: {
-    backgroundColor: primaryColor,
     height: 500,
     display: 'flex',
     padding: 60,
@@ -51,8 +51,9 @@ const useStyles = makeStyles({
     marginRight: 20,
     color: primaryTextColor,
     cursor: 'pointer',
+    fontWeight: 'bolder',
     '&:hover': {
-      fontSize: 14
+      color: 'white'
     }
   }
 });
@@ -75,25 +76,30 @@ const socials = [
 
 const nav = [
   {
-    label: 'About Me'
+    label: 'Projects',
+    link: '/projects'
   },
   {
-    label: 'Projects'
-  },
-  {
-    label: 'Resume'
+    label: 'Resume',
+    link: '/resume'
   }
 ]
 
 function HomePage() {
   const classes = useStyles();
   const { height } = useWindowSize();
+  const history = useHistory();
 
   function handleOpenLink(url) {
     window.open(url);
   }
 
+  function handleNavClick(link) {
+    history.push(link);
+  }
+
   return (
+    <Fade in timeout={1000}>
     <div className={classes.container}>
       <div className={classes.header} style={{ height }}>
         <Typography className={classes.title} variant="h3">
@@ -113,7 +119,7 @@ function HomePage() {
         </div>
         <div className={classes.nav}>
             {nav.map(navLink => (
-              <Typography variant="caption" className={classes.navLink}>
+              <Typography variant="caption" className={classes.navLink} onClick={() => handleNavClick(navLink.link)}>
                 {navLink.label}
               </Typography>
             ))}
@@ -121,6 +127,7 @@ function HomePage() {
         <AboutMe />
       </div>
     </div>
+    </Fade>
   );
 }
 
